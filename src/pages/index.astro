@@ -1,25 +1,32 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 // Component Imports
-import Button from '../components/Button.astro';
-
+import { Button } from "@/components/ui/button";
+import Layout from "@/layouts/main.astro";
+import Header from "@/layouts/header.astro";
+import HeroSection from "@/components/HeroSection.astro";
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
-	</head>
+	<Layout title="Home">
+		<div class="min-h-screen px-4 py-8">
+			<Header />
+			<main
+				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+			>
+				<HeroSection />
 
-	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
+				<div class="relative">
+					
+				</div>
+			</main>
+
+			<footer class="container mx-auto text-center mt-32">
+				<p class="text-gray-600 mb-4">It is necessary to observe.</p>
+				<h2 class="text-4xl font-bold">Treated like a portrait.</h2>
+			</footer>
 		</div>
-	</body>
+	</Layout>
 </html>
