@@ -1,5 +1,6 @@
 ---
 import { Button } from "@/components/ui/button";
+<<<<<<< HEAD
 ---
 
 <div>
@@ -10,6 +11,20 @@ import { Button } from "@/components/ui/button";
         y de escritorio.
     </p>
     <div class="flex gap-4">
+=======
+import { Github, Linkedin } from "lucide-react";
+
+---
+
+<div>
+    <p class="text-gray-500 mb-4">Hola, mi nombre es José Carlos.</p>
+    <h1 class="text-5xl font-bold mb-6">Software Developer</h1>
+    <p class="text-gray-700 mb-6">
+        Soy un desarrollador con experiencia en la creación de aplicaciones web
+        y de escritorio.
+    </p>
+    <div class="flex gap-4 mb-6">
+>>>>>>> 4d4933c0d2631b794d8d57af53f85d0542c537d9
         <Button variant="outline" size="lg" className="px-6 py-3"
             ><span class="text-lg font-semibold"> Descarga mi CV </span></Button
         >
@@ -17,7 +32,19 @@ import { Button } from "@/components/ui/button";
             variant="default"
             size="lg"
             className="px-6 py-3 shadow-lg hover:shadow-xl transition-shadow shadow-primary/30"
+<<<<<<< HEAD
             ><span class="text-lg font-bold"> Contáctame </span></Button
+=======
+            ><span class="text-lg font-semibold"> Contáctame </span></Button
+>>>>>>> 4d4933c0d2631b794d8d57af53f85d0542c537d9
         >
+    </div>
+    <div class="flex gap-4 items-center ">
+        <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer">
+            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Github size={48}/></Button>
+        </a>
+        <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer">
+            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Linkedin size={48} /></Button>
+        </a>
     </div>
 </div>
