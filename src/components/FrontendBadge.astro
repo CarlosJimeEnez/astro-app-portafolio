@@ -1,0 +1,49 @@
+---
+import { Badge } from "@/components/ui/badge";
+import { Image } from "astro:assets";
+---
+
+<div class=" bg-card dark:bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-200 dark:border-gray-700">
+    <h3 class="text-xl font-bold mb-4 text-center">Frontend</h3>
+    <div class="flex flex-wrap gap-2 justify-center ">
+        <Badge variant="secondary" className="flex items-center bg-red-200 gap-1 py-2 px-4 hover:bg-foreground/9">
+            <Image src="/angular-icon-1.svg" width={24} height={24} alt="Angular" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Angular</p>
+        </Badge>
+        
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/react-2.svg" width={24} height={24} alt="React" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">React</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center bg-green-200 gap-1 py-2 px-4 hover:bg-foreground/9">
+            <Image src="/vue-9.svg" width={24} height={24} alt="Vue" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Vue</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center bg-amber-100 gap-1 py-2 px-4 hover:bg-foreground/9">
+            <div class="w-7 h-7 flex items-center justify-center bg-black dark:bg-white rounded-full">
+                <Image src="/astro-icon-light-gradient.svg" width={24} height={24} alt="Astro" class="w-6 h-6" />
+            </div>
+            <p class="text-lg font-semibold p-1">Astro</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/tailwind-css-2.svg" width={24} height={24} alt="Tailwind" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Tailwind</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/html-1.svg" width={24} height={24} alt="Html" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Html</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/css-3.svg" width={24} height={24} alt="Css" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Css</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/typescript.svg" width={24} height={24} alt="Typescript" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Typescript</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/javascript-r.svg" width={24} height={24} alt="Javascript" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Javascript</p>
+        </Badge>
+    </div>
+</div>

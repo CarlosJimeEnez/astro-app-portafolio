@@ -1,0 +1,31 @@
+---
+import { Badge } from "@/components/ui/badge";
+import { Image } from "astro:assets";
+---
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-200 dark:border-gray-700">
+    <h3 class="text-xl font-bold mb-4 text-center">Herramientas</h3>
+    <div class="flex flex-wrap gap-2 justify-center">
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/git-icon.svg" width={24} height={24} alt="Git" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Git</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/docker-4.svg" width={24} height={24} alt="Docker" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Docker</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/netlify.svg" width={24} height={24} alt="Netlify" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">Netlify</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <div class="w-8 h-8 flex items-center justify-center bg-white dark:bg-white rounded-full">
+                <Image src="/mtt.svg" width={24} height={24} alt="MTT" class="w-6 h-6" />
+            </div>
+            <p class="text-lg font-semibold p-1">MQTT</p>
+        </Badge>
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+            <Image src="/websocket.svg" width={24} height={24} alt="WebSocket" class="w-6 h-6" />
+            <p class="text-lg font-semibold p-1">WebSocket</p>
+        </Badge>
+    </div>
+</div>

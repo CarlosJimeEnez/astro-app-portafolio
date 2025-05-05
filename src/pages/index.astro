@@ -1,29 +1,43 @@
 ---
 import "../styles/global.css";
 // Component Imports
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import Layout from "@/layouts/main.astro";
+import { Image } from "astro:assets";
 import Header from "@/layouts/header.astro";
 import HeroSection from "@/components/HeroSection.astro";
+import FrontendBadge from "@/components/FrontendBadge.astro";
+import BackendBadge from "@/components/BackendBadge.astro";
+import HerramientasBadge from "@/components/HerramientasBadge.astro";
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <html lang="en">
 	<Layout title="Home">
-		<div class="min-h-screen px-4 py-8">
+		<div class="min-h-screen px-4 py-8 bg-background dark:bg-background">
 			<Header />
 			<main
-				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-4"
 			>
 				<HeroSection />
 				<div class="relative">
 					
 				</div>
-				<section>
-					Mi Stack
-				</section>
 			</main>
+			<section>
+				<div class="flex items-center justify-center p-1 gap-2 text-5xl font-bold mb-6 select-none">
+					Mi Stack
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-6xl mx-auto ">
+					<!-- Card Frontend -->
+					<FrontendBadge />
+					<!-- Card Backend -->
+					<BackendBadge />
+					<!-- Card Herramientas -->
+					<HerramientasBadge />
+				</div>
+			</section>
 		</div>
 	</Layout>
 </html>
