@@ -1,14 +1,17 @@
 ---
 import "../styles/global.css";
 // Component Imports
-import { Badge } from "@/components/ui/badge";
 import Layout from "@/layouts/main.astro";
-import { Image } from "astro:assets";
 import Header from "@/layouts/header.astro";
 import HeroSection from "@/components/HeroSection.astro";
 import FrontendBadge from "@/components/FrontendBadge.astro";
 import BackendBadge from "@/components/BackendBadge.astro";
 import HerramientasBadge from "@/components/HerramientasBadge.astro";
+import ThreeModelWrapper from "@/components/ThreeModelWrapper.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import ExperienceSection from "@/components/ExperienceSection.astro";
+import Info from "@/layouts/info.astro";
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
@@ -21,15 +24,22 @@ import HerramientasBadge from "@/components/HerramientasBadge.astro";
 				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-4"
 			>
 				<HeroSection />
-				<div class="relative">
-					
-				</div>
+				<ThreeModelWrapper />
 			</main>
-			<section>
-				<div class="flex items-center justify-center p-1 gap-2 text-5xl font-bold mb-6 select-none">
+			<section class="select-none mb-16">
+				<div
+					class="flex items-center justify-center p-1 gap-2 text-5xl font-bold mb-3 select-none"
+				>
 					Mi Stack
 				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-6xl mx-auto ">
+				<div
+					class="flex items-center justify-center p-1 gap-2 text-gray-500 mb-6 select-none"
+				>
+					Las tecnologías que uso en mis proyectos
+				</div>
+				<div
+					class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-6xl mx-auto"
+				>
 					<!-- Card Frontend -->
 					<FrontendBadge />
 					<!-- Card Backend -->
@@ -38,6 +48,77 @@ import HerramientasBadge from "@/components/HerramientasBadge.astro";
 					<HerramientasBadge />
 				</div>
 			</section>
+			<section class="container mx-auto select-none">
+				<div
+					class="flex items-between justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto"
+				>
+					<h5>Mis Proyectos</h5>
+				</div>
+				<div class="mb-3">
+					<p class="text-gray-500 flex items-between justify-start mx-auto mb-6">
+						Me gusta convertir ideas en aplicaciones útiles
+					</p>
+				</div>
+				<div
+					class="grid grid-cols-1 md:grid-cols-3 gap-8 container mx-auto"
+				>
+					<ProjectCard
+						title="Sistema de Reclutamiento Interno (Web App)"
+						description="Plataforma web para gestionar el proceso de reclutamiento interno de una empresa."
+						imageSrc="/supabase-logo-icon.svg"
+						imageAlt="Supabase"
+						imageWidth={24}
+						imageHeight={24}
+						imageClass="w-6 h-6"
+						badges={["Supabase", "Vue.js", "Tailwind", "Vercel"]}
+					/>
+					<ProjectCard
+						title="Punto de Venta (POS)"
+						description="Aplicación de escritorio que se conecta con API de brazo robótico para vender cafés."
+						imageSrc="/project-placeholder.jpg"
+						imageAlt="Gestión de Inventario"
+						badges={[
+							"Angular",
+							"Electron.js",
+							"Flask",
+							"Supabase",
+							"Asp.net",
+						]}
+					/>
+					<ProjectCard
+						title="ERP de Gestión de Inventario de Herramientas"
+						description="Aplicación de escritorio que permite gestionar el inventario de herramientas de una empresa."
+						imageSrc="/three-js-icon.svg"
+						imageAlt="Three.js"
+						imageWidth={48}
+						imageHeight={48}
+						imageClass="w-12 h-12"
+						badges={["Python", "PostgreSQL"]}
+					/>
+					<ProjectCard
+						title="RutaWallet"
+						description="Aplicación móvil para gestionar el presupuesto de transporte público en Puebla."
+						imageSrc="/three-js-icon.svg"
+						imageAlt="Three.js"
+						imageWidth={48}
+						imageHeight={48}
+						imageClass="w-12 h-12"
+						badges={["Flutter", "Supabase"]}
+					/>
+					<ProjectCard
+						title="OtraDimensión"
+						description="(Hackathon) Aplicación web para subir imágenes en un mapa y representar un evento."
+						imageSrc="/three-js-icon.svg"
+						imageAlt="Three.js"
+						imageWidth={48}
+						imageHeight={48}
+						imageClass="w-12 h-12"
+						badges={["Angular", "Firebase", "Mapbox"]}
+					/>
+				</div>
+			</section>
+			<ExperienceSection />
+			<Info></Info>
 		</div>
 	</Layout>
 </html>
