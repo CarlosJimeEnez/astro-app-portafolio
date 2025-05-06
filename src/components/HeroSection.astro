@@ -1,11 +1,11 @@
 ---
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 ---
 
 <div>
     <p class="text-gray-500 mb-4">Hola, mi nombre es José Carlos.</p>
-    <h1 class="text-5xl font-bold mb-6">Software Developer</h1>
+    <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-[#269ece] to-[#2BAE66] text-transparent bg-clip-text">Software Developer</h1>
     <p class="text-gray-700 mb-6">
         Soy un desarrollador con experiencia en la creación de aplicaciones web
         y de escritorio.
@@ -27,6 +27,9 @@ import { Github, Linkedin } from "lucide-react";
         </a>
         <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-jim%C3%A9nez-pe%C3%B1a/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de José Carlos">
             <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Linkedin size={48} /></Button>
+        </a>
+        <a href="mailto:jc.jimenez.pena@outlook.com" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de José Carlos">
+            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Mail size={48} /></Button>
         </a>
     </div>
 </div>

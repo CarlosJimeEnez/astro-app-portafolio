@@ -11,7 +11,7 @@ import ThreeModelWrapper from "@/components/ThreeModelWrapper.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import ExperienceSection from "@/components/ExperienceSection.astro";
 import Info from "@/layouts/info.astro";
-
+import { BookCheck, Code } from "lucide-react";
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
@@ -21,16 +21,24 @@ import Info from "@/layouts/info.astro";
 		<div class="min-h-screen px-4 py-8 bg-background dark:bg-background">
 			<Header />
 			<main
-				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-4"
+				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24"
 			>
 				<HeroSection />
 				<ThreeModelWrapper />
 			</main>
 			<section class="select-none mb-16">
 				<div
-					class="flex items-center justify-center p-1 gap-2 text-5xl font-bold mb-3 select-none"
+					class="flex flex-row items-center justify-center p-1 gap-2 text-5xl font-bold mb-3 select-none"
 				>
-					Mi Stack
+					<BookCheck
+						size={32}
+						className="text-primary flex items-center justify-center "
+					/>
+					<h1>Mi</h1>
+					<span
+						class="bg-gradient-to-r from-primary  to-[#2BAE66] text-transparent bg-clip-text"
+						> Stack</span
+					>
 				</div>
 				<div
 					class="flex items-center justify-center p-1 gap-2 text-gray-500 mb-6 select-none"
@@ -50,12 +58,19 @@ import Info from "@/layouts/info.astro";
 			</section>
 			<section class="container mx-auto select-none">
 				<div
-					class="flex items-between justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto"
+					class="flex flex-row items-center justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto"
 				>
-					<h5>Mis Proyectos</h5>
+					<Code
+						size={32}
+						className="text-primary flex items-center justify-center mt-1 "
+					/>
+					<span>Mis</span>
+					<h5 class="text-primary">Proyectos</h5>
 				</div>
 				<div class="mb-3">
-					<p class="text-gray-500 flex items-between justify-start mx-auto mb-6">
+					<p
+						class="text-gray-500 flex items-between justify-start mx-auto mb-6"
+					>
 						Me gusta convertir ideas en aplicaciones útiles
 					</p>
 				</div>
@@ -120,5 +135,5 @@ import Info from "@/layouts/info.astro";
 			<ExperienceSection />
 		</div>
 	</Layout>
-	<Info></Info>
+	<Info />
 </html>

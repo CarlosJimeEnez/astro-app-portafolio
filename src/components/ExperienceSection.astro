@@ -1,32 +1,43 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro";
+import { BriefcaseBusiness } from "lucide-react";
 ---
 
 <section class="container mx-auto select-none py-16">
-  <div class="flex items-between justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto">
-    <h2>Experiencia Laboral</h2>
+  <div
+    class="flex items-between justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto"
+  >
+    <div class="flex flex-row items-center justify-start space-x-2">
+      <BriefcaseBusiness size={32} className="text-primary mt-1" />
+      <h2 class="">
+        Experiencia <span
+          class="bg-gradient-to-r from-primary to-[#2BAE66] bg-clip-text text-transparent"
+          >Laboral</span
+        >
+      </h2>
+    </div>
   </div>
   <div class="mb-3">
     <p class="text-gray-500 flex items-between justify-start mx-auto mb-6">
       Mi trayectoria profesional en el desarrollo de software
     </p>
   </div>
-  
+
   <div class="relative">
-    <ExperienceItem 
+    <ExperienceItem
       title=""
       company="Rs Automation (Administrador de Sistemas)"
       period="2024 - actual"
       description="Comenzé a administrar los correos electrónicos de los empleados y administro la seguridad de la informacion de estos."
     />
-    
-    <ExperienceItem 
+
+    <ExperienceItem
       title="Software Development "
       company="Rs Automation (Desarrollador de Software)"
       period="2021 - 2024"
       description="He trabajado como desarrollador de software en Rs Automation, donde he realizado proyectos de desarrollo de software para clientes y para herramientas de uso interno."
     />
-    
+
     <!-- Puedes agregar más elementos de experiencia según sea necesario -->
   </div>
 </section>
