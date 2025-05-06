@@ -1,9 +1,7 @@
 ---
 import "../styles/global.css";
 // Component Imports
-import { Badge } from "@/components/ui/badge";
 import Layout from "@/layouts/main.astro";
-import { Image } from "astro:assets";
 import Header from "@/layouts/header.astro";
 import HeroSection from "@/components/HeroSection.astro";
 import FrontendBadge from "@/components/FrontendBadge.astro";
@@ -11,6 +9,9 @@ import BackendBadge from "@/components/BackendBadge.astro";
 import HerramientasBadge from "@/components/HerramientasBadge.astro";
 import ThreeModelWrapper from "@/components/ThreeModelWrapper.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
+import ExperienceSection from "@/components/ExperienceSection.astro";
+import Info from "@/layouts/info.astro";
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
@@ -47,19 +48,19 @@ import ProjectCard from "@/components/ProjectCard.astro";
 					<HerramientasBadge />
 				</div>
 			</section>
-			<section class="select-none">
+			<section class="container mx-auto select-none">
 				<div
-					class="flex items-between justify-start gap-2 text-4xl font-bold mb-3 select-none max-w-6xl mx-auto"
+					class="flex items-between justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto"
 				>
 					<h5>Mis Proyectos</h5>
 				</div>
 				<div class="mb-3">
-					<p class="text-gray-500 flex items-between justify-start max-w-6xl mx-auto">
+					<p class="text-gray-500 flex items-between justify-start mx-auto mb-6">
 						Me gusta convertir ideas en aplicaciones útiles
 					</p>
 				</div>
 				<div
-					class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-6xl mx-auto"
+					class="grid grid-cols-1 md:grid-cols-3 gap-8 container mx-auto"
 				>
 					<ProjectCard
 						title="Sistema de Reclutamiento Interno (Web App)"
@@ -116,6 +117,8 @@ import ProjectCard from "@/components/ProjectCard.astro";
 					/>
 				</div>
 			</section>
+			<ExperienceSection />
+			<Info></Info>
 		</div>
 	</Layout>
 </html>
