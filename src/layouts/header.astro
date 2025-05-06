@@ -1,26 +1,47 @@
 ---
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 ---
 
 <nav class="container mx-auto flex justify-between items-center mb-16">
     <div class="flex items-center gap-2">
         <span class="text-primary text-3xl"></span>
-        <span class="text-xl font-bold">JoaquinSorolla</span>
+        <span class="text-xl font-bold">Carlos Jiménez</span>
     </div>
     <div class="flex gap-8">
-        <a href="#" class="hover:text-primary">Home</a>
-        <a href="#" class="hover:text-primary">What I do</a>
-        <a href="#" class="hover:text-primary">My work</a>
+        <a href="#" class="hover:text-primary">🚀 Mis proyectos</a>
+        <a href="#" class="hover:text-primary">💼 Mi experiencia</a>
     </div>
     <div class="flex gap-2">
-        <a href="https://github.com/CarlosJimeEnez" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de José Carlos">
-            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Github size={48}/></Button>
+        <a
+            href="https://github.com/CarlosJimeEnez"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Perfil de GitHub de José Carlos"
+        >
+            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"
+                ><Github size={48} /></Button
+            >
         </a>
-        <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-jim%C3%A9nez-pe%C3%B1a/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de José Carlos">
-            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Linkedin size={48} /></Button>
+        <a
+            href="https://www.linkedin.com/in/jos%C3%A9-carlos-jim%C3%A9nez-pe%C3%B1a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Perfil de LinkedIn de José Carlos"
+        >
+            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"
+                ><Linkedin size={48} /></Button
+            >
+        </a>
+        <a
+            href="mailto:jc.jimenez.pena@outlook.com"
+            aria-label="Email"
+            class="hover:text-primary"
+        >
+            <Button variant="ghost" size="lg" className="p-5 hover:text-primary"
+                ><Mail size={48} /></Button
+            >
         </a>
     </div>
 </nav>
 <slot />
-
