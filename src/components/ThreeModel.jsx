@@ -6,7 +6,8 @@ import * as THREE from 'three'
 
 const status = tunnel()
 
-const TREE_MODEL_PATH = '/Polygonal_Tree_0505183923_texture_fbx/Polygonal_Tree_0505183923_texture.fbx'
+// Make sure path matches exactly how files are served from public directory
+const TREE_MODEL_PATH = 'Polygonal_Tree_0505183923_texture_fbx/Polygonal_Tree_0505183923_texture.fbx'
 
 export default function App() {
   return (
