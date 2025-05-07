@@ -1,0 +1,218 @@
+---
+import Main from "@/layouts/main.astro";
+import Header from "@/layouts/header.astro";
+import { Image } from "astro:assets";
+import { Github, ExternalLink, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Info from "@/layouts/info.astro";
+
+// Define la función getStaticPaths requerida para rutas dinámicas
+export function getStaticPaths() {
+  // Define los datos de los proyectos
+  const projects = [
+  {
+    slug: "sistema-reclutamiento",
+    title: "Sistema de Reclutamiento Interno (Web App)",
+    subtitle: "Plataforma para gestión de procesos de reclutamiento",
+    description: "Plataforma web para gestionar el proceso de reclutamiento interno de una empresa. Permite a los empleados postularse a vacantes internas, y a los reclutadores gestionar todo el proceso de selección.",
+    imageUrl: "/supabase-logo-icon.svg",
+    technologies: ["Supabase", "Vue.js", "Tailwind", "Vercel"],
+    githubUrl: "https://github.com/usuario/proyecto",
+    demoUrl: "https://demo-del-proyecto.com",
+    features: [
+      "Gestión de vacantes internas",
+      "Sistema de postulaciones",
+      "Seguimiento de procesos de selección",
+      "Notificaciones automáticas"
+    ],
+    challenges: [
+      "Integración con sistemas existentes",
+      "Implementación de permisos por roles"
+    ],
+    learnings: [
+      "Optimización de consultas en Supabase",
+      "Mejores prácticas en Vue.js",
+      "Diseño de interfaces intuitivas"
+    ]
+  },
+  {
+    slug: "punto-venta",
+    title: "Punto de Venta (POS)",
+    subtitle: "Sistema de venta para cafetería con brazo robótico",
+    description: "Aplicación de escritorio que se conecta con API de brazo robótico para vender cafés. Integra gestión de inventario, ventas y reportes.",
+    imageUrl: "/project-placeholder.jpg",
+    technologies: ["Angular", "Electron.js", "Flask", "Supabase", "Asp.net"],
+    githubUrl: "https://github.com/usuario/pos-project",
+    features: [
+      "Interfaz para control de brazo robótico",
+      "Gestión de inventario en tiempo real",
+      "Sistema de reportes de ventas",
+      "Integración con impresoras de tickets"
+    ],
+    challenges: [
+      "Comunicación con hardware especializado",
+      "Sincronización offline/online"
+    ],
+    learnings: [
+      "Desarrollo de aplicaciones de escritorio con Electron",
+      "Integración de sistemas heterogéneos",
+      "Optimización de rendimiento en tiempo real"
+    ]
+  },
+  {
+    slug: "erp-inventario",
+    title: "ERP de Gestión de Inventario de Herramientas",
+    subtitle: "Sistema integral para control de herramientas",
+    description: "Aplicación de escritorio que permite gestionar el inventario de herramientas de una empresa. Incluye control de préstamos, mantenimientos y reportes.",
+    imageUrl: "/three-js-icon.svg",
+    technologies: ["React", "Electron", "Node.js", "SQLite"],
+    githubUrl: "https://github.com/usuario/inventory-tools",
+    features: [
+      "Gestión de inventario con códigos QR",
+      "Sistema de préstamos y devoluciones",
+      "Programación de mantenimientos",
+      "Reportes personalizables"
+    ],
+    challenges: [
+      "Implementación de sistema offline-first",
+      "Diseño de base de datos eficiente"
+    ],
+    learnings: [
+      "Arquitectura de aplicaciones de escritorio",
+      "Gestión de estado en aplicaciones complejas",
+      "Optimización de consultas SQL"
+    ]
+  }
+];
+
+  // Devolver un array de objetos con los parámetros para cada ruta
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+// Recibir los datos del proyecto como props
+const { project } = Astro.props;
+
+// Destructurar los datos del proyecto
+const {
+  title,
+  subtitle,
+  description,
+  imageUrl,
+  technologies,
+  githubUrl,
+  demoUrl,
+  features = [],
+  challenges = [],
+  learnings = [],
+} = project;
+---
+
+<Main title={title}>
+  <div class="min-h-screen px-4 py-8 bg-background dark:bg-background">
+    <Header />
+    <main class="container mx-auto py-8">
+      <!-- Botón de regreso -->
+      <div class="mb-8">
+        <a
+          href="/"
+          class="inline-flex items-center text-gray-600 hover:text-primary transition-colors"
+        >
+          <ArrowLeft size={20} className="mr-2" />
+          Volver a proyectos
+        </a>
+      </div>
+
+      <!-- Encabezado del proyecto -->
+      <div class="mb-12">
+        <h1 class="text-5xl font-bold mb-3 bg-gradient-to-r from-primary to-[#2BAE66] text-transparent bg-clip-text">
+          {title}
+        </h1>
+        {subtitle && <h2 class="text-2xl text-gray-600 mb-6">{subtitle}</h2>}
+        <p class="text-lg text-gray-700 max-w-3xl">
+          {description}
+        </p>
+      </div>
+
+      <!-- Imagen del proyecto -->
+      <div class="mb-12 rounded-xl overflow-hidden shadow-xl">
+        <img
+          src={imageUrl}
+          alt={`Captura de pantalla del proyecto ${title}`}
+          class="w-full h-auto object-cover"
+        />
+      </div>
+
+      <!-- Enlaces -->
+      <div class="flex flex-wrap gap-4 mb-12">
+        {githubUrl && (
+          <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg" className="inline-flex items-center">
+              <Github className="mr-2" size={20} />
+              Ver código
+            </Button>
+          </a>
+        )}
+        {demoUrl && (
+          <a href={demoUrl} target="_blank" rel="noopener noreferrer">
+            <Button variant="default" size="lg" className="inline-flex items-center shadow-lg hover:shadow-xl transition-shadow shadow-primary/30">
+              <ExternalLink className="mr-2" size={20} />
+              Ver demo
+            </Button>
+          </a>
+        )}
+      </div>
+
+      <!-- Tecnologías utilizadas -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-4">Tecnologías utilizadas</h3>
+        <div class="flex flex-wrap gap-2">
+          {technologies.map((tech) => (
+            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Secciones adicionales -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {features.length > 0 && (
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-bold mb-4 text-primary">Características</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              {features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {challenges.length > 0 && (
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-bold mb-4 text-primary">Desafíos</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              {challenges.map((challenge) => (
+                <li>{challenge}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {learnings.length > 0 && (
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-bold mb-4 text-primary">Aprendizajes</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              {learnings.map((learning) => (
+                <li>{learning}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </main>
+  </div>
+  <Info />
+</Main>
