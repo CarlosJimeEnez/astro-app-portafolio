@@ -18,8 +18,8 @@ import { BookCheck, Code } from "lucide-react";
 
 <html lang="en">
 	<Layout title="Home">
-		<div class="min-h-screen px-4 py-8 bg-background dark:bg-background">
-			<Header />
+		<Header />
+		<div class="min-h-screen px-4 py-8 bg-background dark:bg-background ">
 			<main
 				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24"
 			>
@@ -78,17 +78,7 @@ import { BookCheck, Code } from "lucide-react";
 				<div
 					class="grid grid-cols-1 md:grid-cols-4 gap-8 container mx-auto"
 				>
-					<ProjectCard
-						url="/projects/sistema-reclutamiento"
-						title="Sistema de Reclutamiento Interno (Web App)"
-						description="Plataforma web para gestionar el proceso de reclutamiento interno de una empresa."
-						imageSrc="/supabase-logo-icon.svg"
-						imageAlt="Supabase"
-						imageWidth={24}
-						imageHeight={24}
-						imageClass="w-6 h-6"
-						badges={["Supabase", "Vue.js", "Tailwind", "Vercel"]}
-					/>
+					
 					<ProjectCard
 						url="/projects/punto-venta"
 						title="Punto de Venta (POS)"
@@ -127,12 +117,23 @@ import { BookCheck, Code } from "lucide-react";
 					<ProjectCard
 						title="OtraDimensión"
 						description="(Hackathon) Aplicación web para subir imágenes en un mapa y representar un evento."
-						imageSrc="/three-js-icon.svg"
+						imageSrc="/OtraDimLanding.png"
 						imageAlt="Three.js"
 						imageWidth={48}
 						imageHeight={48}
 						imageClass="w-12 h-12"
-						badges={["Angular", "Firebase", "Mapbox"]}
+						badges={["Angular", "Firebase", "Mapbox", "Cloudinary", "Netlify"]}
+					/>
+					<ProjectCard
+						url="/projects/sistema-reclutamiento"
+						title="Sistema de Reclutamiento Interno (Web App)"
+						description="Plataforma web para gestionar el proceso de reclutamiento interno de una empresa."
+						imageSrc="/supabase-logo-icon.svg"
+						imageAlt="Supabase"
+						imageWidth={24}
+						imageHeight={24}
+						imageClass="w-6 h-6"
+						badges={["Supabase", "Vue.js", "Tailwind", "Vercel"]}
 					/>
 				</div>
 			</section>

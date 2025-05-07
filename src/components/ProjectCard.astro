@@ -27,13 +27,14 @@ const {
 
 // Import components
 import { Badge } from "@/components/ui/badge";
+import { Image } from "astro:assets";
 ---
 
 <a href={url} class="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg hover:bg-primary/10 transition-shadow duration-300 cursor-pointer">
   <!-- Card Image -->
   <div class="w-full h-48 bg-gray-200 dark:bg-gray-800 overflow-hidden flex items-center justify-center">
     {imageSrc.endsWith('.svg') ? (
-      <img
+      <Image
         src={imageSrc}
         alt={imageAlt}
         width={imageWidth}
@@ -41,10 +42,13 @@ import { Badge } from "@/components/ui/badge";
         class={imageClass}
       />
     ) : (
-      <img
+      <Image
         src={imageSrc}
         alt={imageAlt}
         class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+        width={imageWidth}
+        height={imageHeight}
+        inferSize={true}
       />
     )}
   </div>

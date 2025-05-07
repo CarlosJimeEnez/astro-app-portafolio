@@ -4,10 +4,11 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { Image } from "astro:assets";
 ---
 
-<nav class="container mx-auto flex justify-between items-center mb-16">
-    <div class="flex items-center gap-2">
-        <Image src="/WCode.svg" alt="Logo" width={48} height={48} />
+<nav class="w-full border-b border-gray-200 dark:border-gray-800 ">
+  <div class="container mx-auto flex justify-between items-center px-4 py-4">
+    <div class="flex items-center justify-center gap-2">
         <span class="text-xl font-bold">Carlos Jiménez</span>
+        <!-- <Image src="/WCode.svg" alt="Logo" width={24} height={24} /> -->
     </div>
     <div class="flex gap-8">
         <a href="#" class="hover:text-primary">🚀 Mis proyectos</a>
@@ -43,6 +44,13 @@ import { Image } from "astro:assets";
                 ><Mail size={48} /></Button
             >
         </a>
+        <a
+            href="https://wa.me/5213312655666"
+            aria-label="WhatsApp"
+            class="hover:text-primary"
+        >
+        </a>
     </div>
+  </div>
 </nav>
 <slot />
