@@ -1,4 +1,4 @@
-import { Suspense, useDeferredValue, useRef, useEffect } from 'react'
+import { Suspense, useDeferredValue, useRef, useEffect, useState, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, OrbitControls, ContactShadows, useFBX, AccumulativeShadows, RandomizedLight, Plane, Circle } from '@react-three/drei'
 import tunnel from 'tunnel-rat'
@@ -9,6 +9,9 @@ const status = tunnel()
 // Make sure path matches exactly how files are served from public directory
 const TREE_MODEL_PATH = '/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture.fbx'
 const BENCH_MODEL_PATH = '/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture.fbx'
+const CAMPFIRE_MODEL_PATH = '/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture.fbx'
+const LOG_MODEL_PATH = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx'
+const LOG_MODEL_PATH2 = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx'
 
 export default function App() {
   return (
@@ -44,8 +47,17 @@ export default function App() {
               </div>
             </status.In>
           }>
-            <TreeModel position={[0, 0, 0]} scale={0.03} castShadow />
-            <BenchModel position={[2, -2.5, 2]} scale={0.014} rotation={[0, Math.PI / 4, 0]} castShadow />
+            <TreeModel position={[-2.5, 0, -2.3]} scale={0.03} castShadow />
+            <BenchModel position={[2.5, -2.5, -0.1]} scale={0.014} rotation={[0, Math.PI / 2.5, 0]} castShadow />
+            {/* Primer tronco para sentarse */}
+            <LogModel position={[-1.2, -2.5, 1.2]} scale={0.015} rotation={[0, Math.PI / 1.4, 0]} castShadow />
+            {/* Segundo tronco para sentarse */}
+            <LogModel2 position={[0, -2.5, -2.3]} scale={0.016} rotation={[0, Math.PI / -1, Math.PI / 1]} castShadow />
+            
+            
+            <CampfireModel position={[0, -2.5, 0]} scale={0.01} castShadow />
+            {/* Efectos de fuego animado encima de la fogata */}
+            <LowPolyFire position={[-0.1, -2.2, 0.1]} scale={0.3} />
             {/* Sombra circular */}
           <CircularShadow position={[0, -3, 0]} />
           </Suspense>
@@ -125,4 +137,129 @@ function BenchModel(props) {
   const fbx = useFBX(BENCH_MODEL_PATH)
   // Centramos el modelo y aplicamos las propiedades pasadas
   return <primitive object={fbx} {...props} />
+}
+
+function CampfireModel(props) {
+  // Usamos useFBX para cargar el modelo de la fogata en formato FBX
+  const fbx = useFBX(CAMPFIRE_MODEL_PATH)
+  // Centramos el modelo y aplicamos las propiedades pasadas
+  return <primitive object={fbx} {...props} />
+}
+
+function LogModel(props) {
+  // Usamos useFBX para cargar el modelo del tronco en formato FBX
+  const fbx = useFBX(LOG_MODEL_PATH)
+  // Clonamos el modelo para asegurarnos de que sea una instancia independiente
+  const clonedFbx = useMemo(() => {
+    return fbx.clone();
+  }, [fbx]);
+  // Centramos el modelo y aplicamos las propiedades pasadas
+  return <primitive object={clonedFbx} {...props} />
+}
+
+function LogModel2(props) {
+  // Usamos useFBX para cargar el modelo del segundo tronco en formato FBX
+  const fbx = useFBX(LOG_MODEL_PATH2)
+  // Clonamos el modelo para asegurarnos de que sea una instancia independiente
+  const clonedFbx = useMemo(() => {
+    return fbx.clone();
+  }, [fbx]);
+  // Centramos el modelo y aplicamos las propiedades pasadas
+  return <primitive object={clonedFbx} {...props} />
+}
+
+// Componente para crear un fuego lowpoly
+function LowPolyFire({ position = [0, 0, 0], scale = 1 }) {
+  const groupRef = useRef();
+  const flamesRef = useRef([]);
+  
+  // Crear geometrías para las llamas
+  useEffect(() => {
+    // Limpiar referencias anteriores
+    flamesRef.current = [];
+    
+    // Crear materiales con diferentes tonos de fuego
+    const materials = [
+      new THREE.MeshBasicMaterial({ color: 0xff5500 }), // naranja
+      new THREE.MeshBasicMaterial({ color: 0xff9500 }), // naranja claro
+      new THREE.MeshBasicMaterial({ color: 0xffdd00 })  // amarillo
+    ];
+    
+    // Crear varias llamas con formas cónicas
+    for (let i = 0; i < 5; i++) {
+      // Crear geometría cónica para cada llama
+      const height = 1.5 + Math.random() * 1.5;
+      const radius = 0.3 + Math.random() * 0.3;
+      const geometry = new THREE.ConeGeometry(radius, height, 4 + Math.floor(Math.random() * 3));
+      
+      // Seleccionar material aleatorio
+      const material = materials[Math.floor(Math.random() * materials.length)];
+      
+      // Crear malla
+      const flame = new THREE.Mesh(geometry, material);
+      
+      // Posicionar aleatoriamente alrededor del centro
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.random() * 0.3;
+      flame.position.set(
+        Math.sin(angle) * distance,
+        height / 2 - 0.5 + Math.random() * 0.2,
+        Math.cos(angle) * distance
+      );
+      
+      // Rotar ligeramente
+      flame.rotation.set(
+        Math.random() * 0.2 - 0.1,
+        Math.random() * Math.PI * 2,
+        Math.random() * 0.2 - 0.1
+      );
+      
+      // Guardar referencia para animación
+      flamesRef.current.push({
+        mesh: flame,
+        initialY: flame.position.y,
+        initialScale: flame.scale.clone(),
+        speed: 0.5 + Math.random() * 1.5,
+        phase: Math.random() * Math.PI * 2
+      });
+      
+      // Añadir al grupo
+      groupRef.current.add(flame);
+    }
+    
+    // Añadir una luz puntual para iluminar alrededor del fuego
+    const light = new THREE.PointLight(0xff7700, 1, 10);
+    light.position.set(0, 1, 0);
+    groupRef.current.add(light);
+    
+  }, []);
+  
+  // Animar las llamas
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return;
+    
+    const time = clock.getElapsedTime();
+    
+    flamesRef.current.forEach((flame) => {
+      // Animar posición vertical
+      flame.mesh.position.y = flame.initialY + Math.sin(time * flame.speed + flame.phase) * 0.1;
+      
+      // Animar escala
+      const scaleValue = 0.9 + Math.sin(time * flame.speed * 0.5 + flame.phase) * 0.15;
+      flame.mesh.scale.set(
+        flame.initialScale.x * scaleValue,
+        flame.initialScale.y * (scaleValue * 0.8 + 0.2),
+        flame.initialScale.z * scaleValue
+      );
+      
+      // Animar rotación
+      flame.mesh.rotation.y += 0.01 * flame.speed;
+    });
+  });
+  
+  return (
+    <group position={position} scale={scale} ref={groupRef}>
+      {/* Las llamas se añaden dinámicamente en useEffect */}
+    </group>
+  );
 }
