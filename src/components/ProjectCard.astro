@@ -21,7 +21,7 @@ const {
   badges = [],
   imageWidth = 400,
   imageHeight = 300,
-  imageClass = "w-full h-full object-cover transition-transform duration-300 hover:scale-105",
+  imageClass = "w-full h-full object-cover transition-transform duration-300",
   url = "/projects/" + title.toLowerCase().replace(/ /g, '-')
 } = Astro.props;
 
@@ -30,7 +30,7 @@ import { Badge } from "@/components/ui/badge";
 import { Image } from "astro:assets";
 ---
 
-<a href={url} class="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg hover:bg-primary/10 transition-shadow duration-300 cursor-pointer">
+<a href={url} class="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg hover:bg-primary/10 transition-all duration-300 cursor-pointer hover:scale-105">
   <!-- Card Image -->
   <div class="w-full h-48 bg-gray-200 dark:bg-gray-800 overflow-hidden flex items-center justify-center">
     {imageSrc.endsWith('.svg') ? (
@@ -45,7 +45,7 @@ import { Image } from "astro:assets";
       <Image
         src={imageSrc}
         alt={imageAlt}
-        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+        class="w-full h-full object-cover transition-transform duration-300"
         width={imageWidth}
         height={imageHeight}
         inferSize={true}
