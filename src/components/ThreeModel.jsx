@@ -1,6 +1,6 @@
 import { Suspense, useDeferredValue, useRef, useEffect, useState, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, OrbitControls, ContactShadows, useFBX, AccumulativeShadows, RandomizedLight, Plane, Circle, Instances, Instance } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useGLTF, OrbitControls, ContactShadows, useFBX, AccumulativeShadows, RandomizedLight, Plane, Circle, Instances, Instance, Sky, Environment, Stars } from '@react-three/drei'
 import tunnel from 'tunnel-rat'
 import * as THREE from 'three'
 
@@ -14,15 +14,57 @@ const LOG_MODEL_PATH = '/Log_Illustration_0508051253_texture_fbx/Log_Illustratio
 const LOG_MODEL_PATH2 = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx'
 
 export default function App() {
+  // Estado para controlar el tema (sincronizado con el tema del documento)
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  // Efecto para detectar cambios en el tema del documento
+  useEffect(() => {
+    // Verificar tema inicial
+    setIsDarkMode(document.documentElement.classList.contains('dark'));
+    
+    // Crear un observer para detectar cambios en las clases del html
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+      });
+    });
+    
+    // Iniciar observación
+    observer.observe(document.documentElement, { attributes: true });
+    
+    // Limpiar observer al desmontar
+    return () => observer.disconnect();
+  }, []);
+  
   return (
     <>
       <header>
         <status.Out />
       </header>
       <Canvas shadows camera={{ position: [0, 5, 10], fov: 50 }}>
-        {/* Luz tenue de luna */}
-        <MoonLight />
-        <hemisphereLight color="white" groundColor="blue" intensity={0.5} />
+        {/* Iluminación condicional según el tema */}
+        {isDarkMode ? (
+          // MODO OSCURO - Luz de luna
+          <>
+            <MoonLight />
+            <hemisphereLight color="white" groundColor="blue" intensity={0.5} />
+            <Stars radius={100} depth={50} count={1000} factor={4} fade speed={1} />
+          </>
+        ) : (
+          // MODO CLARO - Luz solar
+          <>
+            <SunLight />
+            <Sky 
+              distance={450000} 
+              sunPosition={[0, 1, 0]} 
+              inclination={0.5} 
+              azimuth={0.25} 
+            />
+          </>
+        )}
+        
         <group position={[0, 0, 0]}>
           <Suspense fallback={
             <status.In>
@@ -58,10 +100,13 @@ export default function App() {
             <LogModel2 position={[0, -2.5, -2.3]} scale={0.016} rotation={[0, Math.PI / -1, Math.PI / 1]} castShadow receiveShadow />
             
             <CampfireModel position={[0, -2.5, 0]} scale={0.01} castShadow receiveShadow />
-            {/* Efectos de fuego animado encima de la fogata */}
-            <LowPolyFire position={[-0.1, -2.2, 0.1]} scale={0.4} />
-            {/* Luz dinámica del fuego */}
-            <FireLight position={[0, -1.8, 0]} />
+            {/* Efectos de fuego y luz condicionados al tema */}
+            {isDarkMode && (
+              <>
+                <LowPolyFire position={[-0.1, -2.2, 0.1]} scale={0.4} />
+                <FireLight position={[0, -1.8, 0]} />
+              </>
+            )}
             {/* Sombra circular */}
             <PlantGroup position={[0, -2.9, 0]} />
           <CircularShadow position={[0, -3, 0]} />
@@ -73,7 +118,7 @@ export default function App() {
               segments={[20, 20]}     // Más segmentos para ondulaciones más suaves pero aún "low-poly"
               hilliness={0.25}        // Ondulación sutil
               baseY={-2.9}           // Nivel base del suelo
-              color="#6B8E23"         // Un verde oliva
+              color={isDarkMode ? "#6B8E23" : "#8BC34A"}  // Verde oliva en modo oscuro, verde más claro en modo luz
             />
          
           </Suspense>
@@ -242,6 +287,48 @@ function LogModel2(props) {
 }
 
 // Componente para crear un fuego lowpoly
+// Componente para crear luz solar para el modo light
+function SunLight() {
+  const sunLightRef = useRef();
+  
+  useEffect(() => {
+    if (sunLightRef.current) {
+      // Configurar las propiedades de la luz direccional para simular el sol
+      sunLightRef.current.shadow.mapSize.width = 2048;
+      sunLightRef.current.shadow.mapSize.height = 2048;
+      sunLightRef.current.shadow.camera.far = 50;
+      sunLightRef.current.shadow.camera.left = -20;
+      sunLightRef.current.shadow.camera.right = 20;
+      sunLightRef.current.shadow.camera.top = 20;
+      sunLightRef.current.shadow.camera.bottom = -20;
+      sunLightRef.current.shadow.bias = -0.0003;
+    }
+  }, []);
+  
+  return (
+    <>
+      {/* Luz principal del sol */}
+      <directionalLight
+        ref={sunLightRef}
+        position={[10, 20, 15]}
+        intensity={1.5}
+        color="#FFFAEA"
+        castShadow
+      />
+      
+      {/* Luz ambiental intensa para iluminar todas las áreas */}
+      <ambientLight intensity={0.8} color="#E2F3FF" />
+      
+      {/* Hemisferio para dar un toque azulado al cielo y verdoso al suelo */}
+      <hemisphereLight 
+        color="#B1E1FF" 
+        groundColor="#A0D170" 
+        intensity={1} 
+      />
+    </>
+  );
+}
+
 // Componente para crear una luz dinámica que simula el fuego con animación más rápida e intensa
 function FireLight({ position = [0, 0, 0] }) {
   const lightRef = useRef();
