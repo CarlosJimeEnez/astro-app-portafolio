@@ -7,7 +7,8 @@ import * as THREE from 'three'
 const status = tunnel()
 
 // Make sure path matches exactly how files are served from public directory
-const TREE_MODEL_PATH = 'Polygonal_Tree_0505183923_texture_fbx/Polygonal_Tree_0505183923_texture.fbx'
+const TREE_MODEL_PATH = '/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture.fbx'
+const BENCH_MODEL_PATH = '/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture.fbx'
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
             </status.In>
           }>
             <TreeModel position={[0, 0, 0]} scale={0.03} castShadow />
+            <BenchModel position={[2, -2.5, 2]} scale={0.014} rotation={[0, Math.PI / 4, 0]} castShadow />
             {/* Sombra circular */}
           <CircularShadow position={[0, -3, 0]} />
           </Suspense>
@@ -114,6 +116,13 @@ function CircularShadow({ position = [0, 0, 0], radius = 4, opacity = 0.4 }) {
 function TreeModel(props) {
   // Usamos useFBX para cargar modelos en formato FBX
   const fbx = useFBX(TREE_MODEL_PATH)
+  // Centramos el modelo y aplicamos las propiedades pasadas
+  return <primitive object={fbx} {...props} />
+}
+
+function BenchModel(props) {
+  // Usamos useFBX para cargar el modelo de la banca en formato FBX
+  const fbx = useFBX(BENCH_MODEL_PATH)
   // Centramos el modelo y aplicamos las propiedades pasadas
   return <primitive object={fbx} {...props} />
 }
