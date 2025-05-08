@@ -20,9 +20,9 @@ export default function App() {
         <status.Out />
       </header>
       <Canvas shadows camera={{ position: [0, 5, 10], fov: 50 }}>
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.3} />
         <directionalLight 
-          position={[5, 5, 5]} 
+          position={[0.1, -1.8, 0.1]} 
           intensity={1} 
           castShadow 
           shadow-mapSize={2048} 
@@ -47,17 +47,19 @@ export default function App() {
               </div>
             </status.In>
           }>
-            <TreeModel position={[-2.5, 0, -2.3]} scale={0.03} castShadow />
-            <BenchModel position={[2.5, -2.5, -0.1]} scale={0.014} rotation={[0, Math.PI / 2.5, 0]} castShadow />
+            <TreeModel position={[-2.5, 0, -2.3]} scale={0.03} castShadow receiveShadow />
+            <BenchModel position={[2.5, -2.5, -0.1]} scale={0.014} rotation={[0, Math.PI / 2.5, 0]} castShadow receiveShadow />
             {/* Primer tronco para sentarse */}
-            <LogModel position={[-1.2, -2.5, 1.2]} scale={0.015} rotation={[0, Math.PI / 1.4, 0]} castShadow />
+            <LogModel position={[-1.2, -2.5, 1.2]} scale={0.015} rotation={[0, Math.PI / 1.4, 0]} castShadow receiveShadow />
             {/* Segundo tronco para sentarse */}
-            <LogModel2 position={[0, -2.5, -2.3]} scale={0.016} rotation={[0, Math.PI / -1, Math.PI / 1]} castShadow />
+            <LogModel2 position={[0, -2.5, -2.3]} scale={0.016} rotation={[0, Math.PI / -1, Math.PI / 1]} castShadow receiveShadow />
             
             
-            <CampfireModel position={[0, -2.5, 0]} scale={0.01} castShadow />
+            <CampfireModel position={[0, -2.5, 0]} scale={0.01} castShadow receiveShadow />
             {/* Efectos de fuego animado encima de la fogata */}
             <LowPolyFire position={[-0.1, -2.2, 0.1]} scale={0.3} />
+            {/* Luz dinámica del fuego */}
+            <FireLight position={[0, -1.8, 0]} />
             {/* Sombra circular */}
           <CircularShadow position={[0, -3, 0]} />
           </Suspense>
@@ -169,6 +171,67 @@ function LogModel2(props) {
 }
 
 // Componente para crear un fuego lowpoly
+// Componente para crear una luz dinámica que simula el fuego
+function FireLight({ position = [0, 0, 0] }) {
+  const lightRef = useRef();
+  const pointLightRef = useRef();
+  
+  // Animar la intensidad y color de la luz para simular el parpadeo del fuego
+  useFrame(({ clock }) => {
+    if (!lightRef.current || !pointLightRef.current) return;
+    
+    const time = clock.getElapsedTime();
+    
+    // Variación de intensidad para simular parpadeo
+    const flickerSpeed = 2.5;
+    const flickerIntensity = 0.2;
+    const baseIntensity = 1.5;
+    const intensity = baseIntensity + Math.sin(time * flickerSpeed) * flickerIntensity + 
+                     Math.sin(time * flickerSpeed * 1.5) * flickerIntensity * 0.5 +
+                     Math.sin(time * flickerSpeed * 2.7) * flickerIntensity * 0.3;
+    
+    // Variación de color entre tonos naranjas y amarillos
+    const r = 1.0; // Rojo siempre alto para el fuego
+    const g = 0.5 + Math.sin(time * 1.5) * 0.15; // Verde varía para dar tonos entre naranja y amarillo
+    const b = 0.2 + Math.sin(time * 2.3) * 0.05; // Azul bajo pero con ligera variación
+    
+    // Aplicar valores a la luz
+    lightRef.current.intensity = intensity * 1.5;
+    lightRef.current.color.setRGB(r, g, b);
+    
+    // Luz puntual más suave para iluminación general
+    pointLightRef.current.intensity = intensity * 0.8;
+    pointLightRef.current.color.setRGB(r, g * 0.8, b * 0.5);
+  });
+  
+  return (
+    <group position={position}>
+      {/* Luz principal del fuego con sombras */}
+      <spotLight 
+        ref={lightRef}
+        position={[0, 0.5, 0]}
+        angle={Math.PI / 2.5}
+        penumbra={0.5}
+        intensity={1.5}
+        color={"#ff7700"}
+        castShadow
+        shadow-mapSize={[512, 512]}
+        shadow-bias={-0.001}
+      />
+      
+      {/* Luz puntual adicional para iluminación ambiental */}
+      <pointLight 
+        ref={pointLightRef}
+        position={[0, 0.3, 0]}
+        intensity={1.2}
+        color={"#ff5500"}
+        distance={6}
+        decay={2}
+      />
+    </group>
+  );
+}
+
 function LowPolyFire({ position = [0, 0, 0], scale = 1 }) {
   const groupRef = useRef();
   const flamesRef = useRef([]);
