@@ -21,10 +21,10 @@ import { BookCheck, Code } from "lucide-react";
 		<Header />
 		<div class="min-h-screen px-4 py-8 bg-background dark:bg-background ">
 			<main
-				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24"
+				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24 "
 			>
 				<HeroSection />
-				<ThreeModelWrapper client:load/>
+				<ThreeModelWrapper/>
 			</main>
 			<section class="select-none mb-16">
 				<div
@@ -79,6 +79,38 @@ import { BookCheck, Code } from "lucide-react";
 					class="grid grid-cols-1 md:grid-cols-4 gap-8 container mx-auto"
 				>
 					
+					
+					<ProjectCard
+						title="RutaWallet"
+						description="Aplicación móvil para gestionar el presupuesto de transporte público en Puebla."
+						imageSrc="/RutaWallet.png"
+						imageAlt="Three.js"
+						imageWidth={48}
+						imageHeight={48}
+						imageClass="w-12 h-12"
+						badges={["Flutter", "Supabase", "MapLibre", "GetX"]}
+					/>
+					<ProjectCard
+						title="OtraDimensión"
+						description="(Hackathon) Aplicación web para subir imágenes en un mapa y representar un evento."
+						imageSrc="/OtraDimLanding.png"
+						imageAlt="Three.js"
+						imageWidth={48}
+						imageHeight={48}
+						imageClass="w-12 h-12"
+						badges={["Angular", "Firebase", "Mapbox", "Cloudinary", "Netlify"]}
+					/>
+					<ProjectCard
+						url="/projects/sistema-reclutamiento"
+						title="Sistema de Reclutamiento Interno"
+						description="Plataforma web para gestionar el proceso de reclutamiento interno de una empresa."
+						imageSrc="/ERP.png"
+						imageAlt="Supabase"
+						imageWidth={24}
+						imageHeight={24}
+						imageClass="w-6 h-6"
+						badges={["Supabase", "Vue.js", "Tailwind", "Vercel", "Shadcn Vue", "Pinia"]}
+					/>
 					<ProjectCard
 						url="/projects/punto-venta"
 						title="Punto de Venta (POS)"
@@ -103,37 +135,6 @@ import { BookCheck, Code } from "lucide-react";
 						imageHeight={48}
 						imageClass="w-12 h-12"
 						badges={["Python", "PostgreSQL"]}
-					/>
-					<ProjectCard
-						title="RutaWallet"
-						description="Aplicación móvil para gestionar el presupuesto de transporte público en Puebla."
-						imageSrc="/RutaWallet.png"
-						imageAlt="Three.js"
-						imageWidth={48}
-						imageHeight={48}
-						imageClass="w-12 h-12"
-						badges={["Flutter", "Supabase", "MapLibre", "GetX"]}
-					/>
-					<ProjectCard
-						title="OtraDimensión"
-						description="(Hackathon) Aplicación web para subir imágenes en un mapa y representar un evento."
-						imageSrc="/OtraDimLanding.png"
-						imageAlt="Three.js"
-						imageWidth={48}
-						imageHeight={48}
-						imageClass="w-12 h-12"
-						badges={["Angular", "Firebase", "Mapbox", "Cloudinary", "Netlify"]}
-					/>
-					<ProjectCard
-						url="/projects/sistema-reclutamiento"
-						title="(Privado) Sistema de Reclutamiento Interno"
-						description="Plataforma web para gestionar el proceso de reclutamiento interno de una empresa."
-						imageSrc="/ERP.png"
-						imageAlt="Supabase"
-						imageWidth={24}
-						imageHeight={24}
-						imageClass="w-6 h-6"
-						badges={["Supabase", "Vue.js", "Tailwind", "Vercel", "Shadcn Vue", "Pinia"]}
 					/>
 				</div>
 			</section>
