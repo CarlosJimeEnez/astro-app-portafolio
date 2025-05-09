@@ -1,10 +1,61 @@
 import { Suspense, useDeferredValue, useRef, useEffect, useState, useMemo } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useGLTF, OrbitControls, ContactShadows, useFBX, AccumulativeShadows, RandomizedLight, Plane, Circle, Instances, Instance, Sky, Environment, Stars } from '@react-three/drei'
+import { useGLTF, OrbitControls, ContactShadows, useFBX, AccumulativeShadows, RandomizedLight, Plane, Circle, Instances, Instance, Sky, Environment, Stars, PerspectiveCamera } from '@react-three/drei'
 import tunnel from 'tunnel-rat'
 import * as THREE from 'three'
 
 const status = tunnel()
+
+// Componente de cámara animada con efecto de acercamiento suave
+function AnimatedCamera() {
+  const cameraRef = useRef();
+  const initialPos = useMemo(() => new THREE.Vector3(10, 12, 15), []); // Posición inicial más alejada
+  const targetPos = useMemo(() => new THREE.Vector3(0, 5, 5), []); // Posición final
+  const [animationComplete, setAnimationComplete] = useState(false);
+
+  // Usar useFrame para animar la cámara cada frame
+  useFrame(({ clock }) => {
+    if (!cameraRef.current || animationComplete) return;
+    
+    // Calcular el factor de animación (0 a 1) con una curva de animación suave
+    const animationDuration = 3.0; // duración en segundos
+    const t = Math.min(1, clock.getElapsedTime() / animationDuration);
+    const smoothT = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; // Función de ease-in-out
+    
+    // Interpolar posición
+    const newPos = new THREE.Vector3().lerpVectors(initialPos, targetPos, smoothT);
+    cameraRef.current.position.copy(newPos);
+    
+    // Marcar la animación como completa cuando llegue al final
+    if (t >= 1) {
+      setAnimationComplete(true);
+    }
+  });
+  
+  return (
+    <>
+      <PerspectiveCamera
+        ref={cameraRef}
+        makeDefault
+        position={initialPos.toArray()}
+        fov={50}
+        near={0.1}
+        far={1000}
+      />
+      {animationComplete && 
+        <OrbitControls 
+          enableZoom={true}
+          enablePan={true}
+          minDistance={3}
+          maxDistance={12}
+          enableDamping={true}
+          dampingFactor={0.05}
+        />
+
+      }
+    </>
+  );
+}
 
 // Make sure path matches exactly how files are served from public directory
 const TREE_MODEL_PATH = '/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture.fbx'
@@ -43,7 +94,8 @@ export default function App() {
       <header>
         <status.Out />
       </header>
-      <Canvas shadows camera={{ position: [0, 5, 10], fov: 50 }}>
+      <Canvas shadows>
+        <AnimatedCamera />
         {/* Iluminación condicional según el tema */}
         {isDarkMode ? (
           // MODO OSCURO - Luz de luna
@@ -114,8 +166,8 @@ export default function App() {
           {/* Suelo reflectante */}
           {/* NUEVO SUELO DE CAMPO LOW POLY */}
           <LowPolyFieldGround 
-              size={[25, 25]}         // Tamaño del campo
-              segments={[20, 20]}     // Más segmentos para ondulaciones más suaves pero aún "low-poly"
+              size={[20, 20]}         // Tamaño del campo
+              segments={[15, 15]}     // Más segmentos para ondulaciones más suaves pero aún "low-poly"
               hilliness={0.25}        // Ondulación sutil
               baseY={-2.9}           // Nivel base del suelo
               color={isDarkMode ? "#6B8E23" : "#8BC34A"}  // Verde oliva en modo oscuro, verde más claro en modo luz

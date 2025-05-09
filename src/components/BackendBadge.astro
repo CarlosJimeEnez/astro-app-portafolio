@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Image } from "astro:assets";
 ---
 
-<div class="bg-white dark:bg-gray-800 rounded-lg transition-shadow p-6 border border-gray-200 dark:border-gray-700">
+<div class="bg-white dark:bg-card rounded-lg transition-shadow p-6 border border-gray-200 dark:border-gray-700">
     <h3 class="text-xl font-bold mb-4 text-center">Backend</h3>
     <div class="flex flex-wrap gap-2 justify-center">
         <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
@@ -16,7 +16,7 @@ import { Image } from "astro:assets";
         </Badge>
         <Badge variant="secondary" className="flex items-center gap-1 py-2 px-4 bg-green-100 hover:bg-foreground/9">
             <Image src="/supabase-logo-icon.svg" width={24} height={24} alt="Supabase" class="w-6 h-6" />
-            <p class="text-lg font-semibold p-1">Supabase</p>
+            <p class="text-lg font-semibold p-1 dark:text-accent">Supabase</p>
         </Badge>
         
     </div>
