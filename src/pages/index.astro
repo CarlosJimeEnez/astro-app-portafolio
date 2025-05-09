@@ -19,20 +19,23 @@ import { BookCheck, Code } from "lucide-react";
 <html lang="en">
 	<Layout title="Home">
 		<Header />
-		<div class="min-h-screen px-4 py-8 bg-background dark:bg-background ">
+		<div
+			class="min-h-screen px-4 py-8 bg-background dark:bg-background bg-gradient-to-b bg-blur-sm from-white via-[#269ece27] to-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden"
+		>
 			<main
-				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24 "
+				class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24"
 			>
 				<HeroSection />
-				<ThreeModelWrapper/>
+				<ThreeModelWrapper />
 			</main>
-			<section class="select-none mb-16">
+			<section class="select-none mb-16 relative ">
+				<div class="absolute inset-0 bg-radial from-primary/30 from-50% to-primary/10 opacity-40 blur-2xl"></div>
 				<div
-					class="flex flex-row items-center justify-center p-1 gap-2 text-5xl font-bold mb-3 select-none"
+					class="flex flex-row items-center justify-center p-1 gap-2 text-5xl font-bold mb-3 select-none relative"
 				>
 					<BookCheck
 						size={32}
-						className="text-primary flex items-center justify-center "
+						className="text-primary flex items-center justify-center  "
 					/>
 					<h1>Mi</h1>
 					<span
@@ -42,22 +45,31 @@ import { BookCheck, Code } from "lucide-react";
 					>
 				</div>
 				<div
-					class="flex items-center justify-center p-1 gap-2 dark:text-gray-300 text-gray-500 mb-6 select-none"
+					class="flex items-center justify-center p-1 gap-2 dark:text-gray-300 text-gray-500 mb-6 select-none relative"
 				>
 					Las tecnologías que uso en mis proyectos
 				</div>
 				<div
-					class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-6xl mx-auto"
+					class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-6xl mx-auto relative p-4 rounded-xl overflow-hidden"
 				>
+					<!-- Fondo rojo difuminado -->
+					
 					<!-- Card Frontend -->
-					<FrontendBadge />
+					<FrontendBadge class="relative z-10" />
 					<!-- Card Backend -->
-					<BackendBadge />
+					<BackendBadge class="relative z-10" />
 					<!-- Card Herramientas -->
-					<HerramientasBadge />
+					<HerramientasBadge class="relative z-10" />
 				</div>
 			</section>
-			<section id="proyectos" class="container mx-auto select-none">
+			<section
+				id="proyectos"
+				class="container mx-auto select-none relative"
+			>
+				<div
+					class="absolute inset-0  pointer-events-none"
+				>
+				</div>
 				<div
 					class="flex flex-row items-center justify-start gap-2 text-4xl font-bold mb-3 select-none mx-auto"
 				>
@@ -76,10 +88,8 @@ import { BookCheck, Code } from "lucide-react";
 					</p>
 				</div>
 				<div
-					class="grid grid-cols-1 md:grid-cols-4 gap-8 container mx-auto"
+					class="grid grid-cols-1 md:grid-cols-4 gap-8 container mx-auto relative p-4 rounded-xl overflow-hidden"
 				>
-					
-					
 					<ProjectCard
 						title="RutaWallet"
 						description="Aplicación móvil para gestionar el presupuesto de transporte público en Puebla."
@@ -98,7 +108,13 @@ import { BookCheck, Code } from "lucide-react";
 						imageWidth={48}
 						imageHeight={48}
 						imageClass="w-12 h-12"
-						badges={["Angular", "Firebase", "Mapbox", "Cloudinary", "Netlify"]}
+						badges={[
+							"Angular",
+							"Firebase",
+							"Mapbox",
+							"Cloudinary",
+							"Netlify",
+						]}
 					/>
 					<ProjectCard
 						url="/projects/sistema-reclutamiento"
@@ -109,7 +125,14 @@ import { BookCheck, Code } from "lucide-react";
 						imageWidth={24}
 						imageHeight={24}
 						imageClass="w-6 h-6"
-						badges={["Supabase", "Vue.js", "Tailwind", "Vercel", "Shadcn Vue", "Pinia"]}
+						badges={[
+							"Supabase",
+							"Vue.js",
+							"Tailwind",
+							"Vercel",
+							"Shadcn Vue",
+							"Pinia",
+						]}
 					/>
 					<ProjectCard
 						url="/projects/punto-venta"
