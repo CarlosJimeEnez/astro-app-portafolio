@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Compensar la altura del header */
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

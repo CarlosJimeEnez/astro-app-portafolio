@@ -12,8 +12,8 @@ import ThemeToggle from "@/components/ThemeToggle.astro";
         <!-- <Image src="/WCode.svg" alt="Logo" width={24} height={24} /> -->
     </div>
     <div class="flex gap-8">
-        <a href="#" class="hover:text-primary">🚀 Mis proyectos</a>
-        <a href="#" class="hover:text-primary">💼 Mi experiencia</a>
+        <a href="#proyectos" class="leading-none font-semibold hover:text-gray-600 dark:hover:text-gray-400">🚀 Mis proyectos</a>
+        <a href="#experiencia" class="leading-none font-semibold hover:text-gray-600 dark:hover:text-gray-400">💼 Mi experiencia</a>
     </div>
     <div class="flex gap-2 items-center">
         <ThemeToggle />
@@ -56,3 +56,75 @@ import ThemeToggle from "@/components/ThemeToggle.astro";
   </div>
 </nav>
 <slot />
+
+<script>
+  // Script para manejar el desplazamiento suave con Tailwind
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        
+        const targetElement = document.querySelector(href);
+        if (!targetElement) return;
+        
+        // Calcular la posición de desplazamiento
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        // Desplazamiento suave
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Añadir clases de Tailwind para la animación
+        targetElement.classList.add(
+          'transition-all', 
+          'duration-1000', 
+          'ease-out', 
+          'bg-primary/10', 
+          'dark:bg-primary/20', 
+          'shadow-lg', 
+          'scale-[1.01]', 
+          'rounded-lg'
+        );
+        
+        // Eliminar clases después de la animación
+        setTimeout(() => {
+          targetElement.classList.remove(
+            'bg-primary/10', 
+            'dark:bg-primary/20', 
+            'shadow-lg', 
+            'scale-[1.01]'
+          );
+          
+          // Añadir clases para la transición de salida
+          targetElement.classList.add(
+            'bg-transparent', 
+            'shadow-none', 
+            'scale-100'
+          );
+          
+          // Eliminar todas las clases de animación después de completarse
+          setTimeout(() => {
+            targetElement.classList.remove(
+              'transition-all', 
+              'duration-1000', 
+              'ease-out', 
+              'bg-transparent', 
+              'shadow-none', 
+              'scale-100',
+              'rounded-lg'
+            );
+          }, 1000);
+        }, 1000);
+      });
+    });
+  });
+</script>
