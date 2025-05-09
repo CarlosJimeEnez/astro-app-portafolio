@@ -10,6 +10,7 @@ interface Props {
   imageHeight?: number;
   imageClass?: string;
   url?: string;
+  featured?: boolean;
 }
 
 // Destructure props with default values
@@ -22,7 +23,8 @@ const {
   imageWidth = 400,
   imageHeight = 300,
   imageClass = "w-full h-full object-cover transition-transform duration-300",
-  url = "/projects/" + title.toLowerCase().replace(/ /g, '-')
+  url = "/projects/" + title.toLowerCase().replace(/ /g, '-'),
+  featured = false
 } = Astro.props;
 
 // Import components
@@ -30,43 +32,56 @@ import { Badge } from "@/components/ui/badge";
 import { Image } from "astro:assets";
 ---
 
-<a href={url} class="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg hover:bg-primary/10 transition-all duration-300 cursor-pointer hover:scale-105">
-  <!-- Card Image -->
-  <div class="w-full h-48 bg-gray-200 dark:bg-gray-800 overflow-hidden flex items-center justify-center">
-    {imageSrc.endsWith('.svg') ? (
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        width={imageWidth}
-        height={imageHeight}
-        class={imageClass}
-      />
-    ) : (
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        class="w-full h-full object-cover transition-transform duration-300"
-        width={imageWidth}
-        height={imageHeight}
-        inferSize={true}
-      />
+<a href={url} class={`group relative block rounded-xl hover:bg-primary/10 overflow-hidden ${featured ? 'border-2 border-primary' : 'border border-gray-200 dark:border-gray-700'} bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
+  <!-- Card Image with Overlay -->
+  <div class="relative overflow-hidden">
+    <div class={`w-full ${featured ? 'h-56' : 'h-48'} bg-gray-100 dark:bg-gray-800 overflow-hidden`}>
+      {imageSrc.endsWith('.svg') ? (
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          width={imageWidth}
+          height={imageHeight}
+          class={`${imageClass} group-hover:scale-110`}
+        />
+      ) : (
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          width={imageWidth}
+          height={imageHeight}
+          inferSize={true}
+        />
+      )}
+    </div>
+    
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    
+    {featured && (
+      <div class="absolute top-3 right-3">
+        <span class="bg-primary text-white text-xs font-medium px-2.5 py-1 rounded-full">Featured</span>
+      </div>
     )}
   </div>
   
   <!-- Card Content -->
-  <div class="p-4">
-    <h3 class="text-xl font-bold mb-2">
+  <div class="p-5">
+    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300">
       {title}
     </h3>
-    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
       {description}
     </p>
     
     <!-- Card Footer with Badges -->
     <div class="flex flex-wrap gap-2 mt-auto">
       {badges.map((badge) => (
-        <Badge variant="outline">{badge}</Badge>
+        <Badge variant="outline" className="text-xs font-medium transition-colors">{badge}</Badge>
       ))}
     </div>
   </div>
+  
+  
 </a>

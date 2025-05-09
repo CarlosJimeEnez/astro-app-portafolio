@@ -16,10 +16,9 @@ export function getStaticPaths() {
       subtitle: "Plataforma para gestión de procesos de reclutamiento",
       description:
         "Plataforma web para gestionar el proceso de reclutamiento interno de una empresa. Permite a los empleados postularse a vacantes internas, y a los reclutadores gestionar todo el proceso de selección.",
-      imageUrl: "/supabase-logo-icon.svg",
-      technologies: ["Supabase", "Vue.js", "Tailwind", "Vercel"],
-      githubUrl: "https://github.com/usuario/proyecto",
-      demoUrl: "https://demo-del-proyecto.com",
+      imageUrl: "/ERP.png",
+      demoUrl: "https://cv-admin-fawn.vercel.app/formulario",
+      technologies: ["WebSockets","Supabase", "Vue.js", "Tailwind", "Vercel", "Shadcn Vue", "Pinia"],
       features: [
         "Gestión de vacantes internas",
         "Sistema de postulaciones",
@@ -27,10 +26,12 @@ export function getStaticPaths() {
         "Notificaciones automáticas",
       ],
       challenges: [
+        "Actualización en tiempo real",
         "Integración con sistemas existentes",
         "Implementación de permisos por roles",
       ],
       learnings: [
+        "Implementación de WebSockets",
         "Optimización de consultas en Supabase",
         "Mejores prácticas en Vue.js",
         "Diseño de interfaces intuitivas",
@@ -67,10 +68,10 @@ export function getStaticPaths() {
       subtitle: "Sistema integral para control de herramientas",
       description:
         "Aplicación de escritorio que permite gestionar el inventario de herramientas de una empresa. Incluye control de préstamos, mantenimientos y reportes.",
-      imageUrl: "/three-js-icon.svg",
-      technologies: ["React", "Electron", "Node.js", "SQLite"],
-      githubUrl: "https://github.com/usuario/inventory-tools",
+      imageUrl: "/ERPPython.png",
+      technologies: ["Python", "PostrgreSQL"],
       features: [
+        "Autenticación de ususarios", 
         "Gestión de inventario con códigos QR",
         "Sistema de préstamos y devoluciones",
         "Programación de mantenimientos",
@@ -79,11 +80,14 @@ export function getStaticPaths() {
       challenges: [
         "Implementación de sistema offline-first",
         "Diseño de base de datos eficiente",
+        "Integración con impresoras de tickets",
+        "Creación de aplicación de escritorio"
       ],
       learnings: [
         "Arquitectura de aplicaciones de escritorio",
         "Gestión de estado en aplicaciones complejas",
         "Optimización de consultas SQL",
+        "Uso de Python para crear aplicaciones de escritorio"
       ],
     },
     {
@@ -120,7 +124,7 @@ export function getStaticPaths() {
         "Aplicación móvil para gestionar el presupuesto de transporte público en Puebla.",
       imageUrl: "/RutaWallet.png",
       technologies: ["Flutter", "Supabase", "MapLibre", "GetX"],
-      demoUrl: "https://rutawallet.netlify.app/",
+      // demoUrl: "https://rutawallet.netlify.app/",
       githubUrl: "https://github.com/CarlosJimeEnez/ruta_app",
       challenges: [
         "Gestión de presupuesto",
@@ -221,6 +225,13 @@ const {
                   Ver demo
                 </Button>
               </a>
+            )
+          }
+          {
+            !githubUrl && !demoUrl && (
+              <div class="px-6 py-3 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg inline-flex items-center">
+                <span class="text-gray-600 dark:text-gray-300 font-medium">Privado</span>
+              </div>
             )
           }
         </div>
@@ -325,5 +336,5 @@ const {
       </section>
     </main>
   </div>
-  <Info />
+  
 </Main>
