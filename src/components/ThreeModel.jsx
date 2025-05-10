@@ -94,7 +94,7 @@ export default function App() {
       <header>
         <status.Out />
       </header>
-      <Canvas shadows>
+      <Canvas shadows style={{ background: 'transparent', width: '100%', height: '100%' }}>
         <AnimatedCamera />
         {/* Iluminación condicional según el tema */}
         {isDarkMode ? (
