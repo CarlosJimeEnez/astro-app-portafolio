@@ -3,14 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 ---
 
-<div>
+<div class="text-center md:text-left">
     <p class="text-gray-500 mb-4 dark:text-gray-300">Hola, mi nombre es José Carlos.</p>
-    <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-[#269ece] to-[#2BAE66] text-transparent bg-clip-text">Software Developer</h1>
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-[#269ece] to-[#2BAE66] text-transparent bg-clip-text">Software Developer</h1>
     <p class="text-gray-700 dark:text-gray-300 mb-6">
         Soy un desarrollador con experiencia en la creación de aplicaciones web
         y de escritorio.
     </p>
-    <div class="flex gap-4 mb-6">
+    <div class="flex gap-4 mb-6 justify-center md:justify-start">
         <a href="/archivos/cv_esp_jose_carlos.pdf" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de José Carlos"><Button variant="outline" size="lg" className="px-6 py-3"
             ><span class="text-lg font-semibold"> Ver mi CV </span></Button
         ></a>
@@ -18,13 +18,13 @@ import { Github, Linkedin, Mail } from "lucide-react";
             <Button
                 variant="default"
                 size="lg"
-                className="px-6 py-3 shadow-lg hover:shadow-xl transition-shadow shadow-primary/30"
+                className="px-6 py-3 shadow-lg hover:shadow-xl transition-shadow shadow-primary/30 w-full sm:w-auto"
             >
                 <span class="text-lg dark:text-white font-semibold"> Contáctame </span>
             </Button>
         </a>
     </div>
-    <div class="flex gap-4 items-center ">
+    <div class="flex gap-4 items-center justify-center md:justify-start ">
         <a href="https://github.com/CarlosJimeEnez" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de José Carlos">
             <Button variant="ghost" size="lg" className="p-5 hover:text-primary"><Github size={48}/></Button>
         </a>
