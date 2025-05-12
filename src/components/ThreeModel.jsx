@@ -59,10 +59,21 @@ function AnimatedCamera() {
 
 // Make sure path matches exactly how files are served from public directory
 const TREE_MODEL_PATH = '/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture_fbx/Polygonal_Tree_0508015527_texture.fbx'
-const BENCH_MODEL_PATH = '/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture.fbx'
-const CAMPFIRE_MODEL_PATH = '/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture.fbx'
-const LOG_MODEL_PATH = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx'
-const LOG_MODEL_PATH2 = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx'
+const BENCH_MODEL_PATH = '/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0512162208_texture.glb'
+const CAMPFIRE_MODEL_PATH = '/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0512162023_texture.glb'
+const LOG_MODEL_PATH = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0512161915_texture.glb'
+const LOG_MODEL_PATH2 = '/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0512161915_texture.glb'
+
+// Precargar los modelos GLB
+const preloadGLBModels = () => {
+  useGLTF.preload(BENCH_MODEL_PATH);
+  useGLTF.preload(CAMPFIRE_MODEL_PATH);
+  useGLTF.preload(LOG_MODEL_PATH);
+  useGLTF.preload(LOG_MODEL_PATH2);
+};
+
+// Ejecutar la precarga
+preloadGLBModels();
 
 export default function App() {
   // Estado para controlar el tema (sincronizado con el tema del documento)
@@ -161,20 +172,18 @@ export default function App() {
             )}
             {/* Sombra circular */}
             <PlantGroup position={[0, -2.9, 0]} />
-          <CircularShadow position={[0, -3, 0]} />
-          
-          {/* Suelo reflectante */}
-          {/* NUEVO SUELO DE CAMPO LOW POLY */}
-          <LowPolyFieldGround 
+            <CircularShadow position={[0, -3, 0]} />
+            
+            {/* Suelo reflectante */}
+            {/* NUEVO SUELO DE CAMPO LOW POLY */}
+            <LowPolyFieldGround 
               size={[20, 20]}         // Tamaño del campo
               segments={[15, 15]}     // Más segmentos para ondulaciones más suaves pero aún "low-poly"
               hilliness={0.25}        // Ondulación sutil
               baseY={-2.9}           // Nivel base del suelo
               color={isDarkMode ? "#6B8E23" : "#8BC34A"}  // Verde oliva en modo oscuro, verde más claro en modo luz
             />
-         
           </Suspense>
-          
         </group>
         <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
       </Canvas>
@@ -290,8 +299,8 @@ function CircularShadow({ position = [0, 0, 0], radius = 4, opacity = 0.4 }) {
 }
 
 function TreeModel(props) {
-  // Usamos useFBX para cargar modelos en formato FBX
-  const fbx = useFBX(TREE_MODEL_PATH)
+  // Usamos useFBX para cargar el modelo del árbol en formato FBX
+  const fbx = useFBX(TREE_MODEL_PATH);
   
   // Clonamos el modelo para asegurarnos de que sea una instancia independiente
   const clonedFbx = useMemo(() => {
@@ -304,21 +313,36 @@ function TreeModel(props) {
 
 function BenchModel(props) {
   // Usamos useFBX para cargar el modelo de la banca en formato FBX
-  const fbx = useFBX(BENCH_MODEL_PATH)
+  // Volvemos al modelo FBX que funciona correctamente
+  const fbx = useFBX('/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture_fbx/Banca_de_madera__0508042822_texture.fbx');
+  
+  // Clonamos el modelo para asegurarnos de que sea una instancia independiente
+  const clonedFbx = useMemo(() => {
+    return fbx.clone();
+  }, [fbx]);
+  
   // Centramos el modelo y aplicamos las propiedades pasadas
-  return <primitive object={fbx} {...props} />
+  return <primitive object={clonedFbx} {...props} />
 }
 
 function CampfireModel(props) {
   // Usamos useFBX para cargar el modelo de la fogata en formato FBX
-  const fbx = useFBX(CAMPFIRE_MODEL_PATH)
+  // Volvemos al modelo FBX que funciona correctamente
+  const fbx = useFBX('/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture_fbx/Campfire_Art_0508050240_texture.fbx');
+  
+  // Clonamos el modelo para asegurarnos de que sea una instancia independiente
+  const clonedFbx = useMemo(() => {
+    return fbx.clone();
+  }, [fbx]);
+  
   // Centramos el modelo y aplicamos las propiedades pasadas
-  return <primitive object={fbx} {...props} />
+  return <primitive object={clonedFbx} {...props} />
 }
 
 function LogModel(props) {
   // Usamos useFBX para cargar el modelo del tronco en formato FBX
-  const fbx = useFBX(LOG_MODEL_PATH)
+  // Volvemos al modelo FBX que funciona correctamente
+  const fbx = useFBX('/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx');
   // Clonamos el modelo para asegurarnos de que sea una instancia independiente
   const clonedFbx = useMemo(() => {
     return fbx.clone();
@@ -329,7 +353,8 @@ function LogModel(props) {
 
 function LogModel2(props) {
   // Usamos useFBX para cargar el modelo del segundo tronco en formato FBX
-  const fbx = useFBX(LOG_MODEL_PATH2)
+  // Volvemos al modelo FBX que funciona correctamente
+  const fbx = useFBX('/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture_fbx/Log_Illustration_0508051253_texture.fbx');
   // Clonamos el modelo para asegurarnos de que sea una instancia independiente
   const clonedFbx = useMemo(() => {
     return fbx.clone();
