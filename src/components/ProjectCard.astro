@@ -32,7 +32,7 @@ import { Badge } from "@/components/ui/badge";
 import { Image } from "astro:assets";
 ---
 
-<a href={url} class={`group relative block rounded-xl hover:bg-primary/10 overflow-hidden ${featured ? 'border-2 border-primary' : 'border border-gray-200 dark:border-gray-700'} bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
+<a href={url} class={`group relative block rounded-xl overflow-hidden ${featured ? 'border-2 border-primary' : 'border border-gray-200 dark:border-gray-700'} bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-primary/5 dark:hover:bg-primary/10`}>
   <!-- Card Image with Overlay -->
   <div class="relative overflow-hidden">
     <div class={`w-full ${featured ? 'h-56' : 'h-48'} bg-gray-100 dark:bg-gray-800 overflow-hidden`}>
@@ -59,6 +59,9 @@ import { Image } from "astro:assets";
     <!-- Gradient Overlay -->
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     
+    <!-- Glow Effect on Hover -->
+    <div class="absolute inset-0 bg-primary/20 dark:bg-primary/30 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl pointer-events-none"></div>
+    
     {featured && (
       <div class="absolute top-3 right-3">
         <span class="bg-primary text-white text-xs font-medium px-2.5 py-1 rounded-full">Featured</span>
@@ -68,7 +71,7 @@ import { Image } from "astro:assets";
   
   <!-- Card Content -->
   <div class="p-5">
-    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300 relative z-10">
       {title}
     </h3>
     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
@@ -78,7 +81,7 @@ import { Image } from "astro:assets";
     <!-- Card Footer with Badges -->
     <div class="flex flex-wrap gap-2 mt-auto">
       {badges.map((badge) => (
-        <Badge variant="outline" className="text-xs font-medium transition-colors">{badge}</Badge>
+        <Badge variant="outline" className="text-xs font-medium transition-colors group-hover:border-primary/50 group-hover:bg-primary/5 dark:group-hover:text-white/90">{badge}</Badge>
       ))}
     </div>
   </div>

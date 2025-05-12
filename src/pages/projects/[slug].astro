@@ -168,7 +168,7 @@ const {
 ---
 
 <Main title={title}>
-  <div class="min-h-screen bg-background dark:bg-background select-none">
+  <div class="min-h-screen bg-background dark:bg-accent/10 select-none">
     <Header />
     <main class="container mx-auto px-4 py-12 max-w-4xl">
       <!-- Botón de regreso -->
@@ -178,7 +178,7 @@ const {
           class="inline-flex items-center text-gray-600 hover:text-primary transition-colors"
         >
           <ArrowLeft size={18} className="mr-2" />
-          Volver a proyectos
+          <p class="dark:text-gray-300 text-gray-500">Volver a proyectos</p>
         </a>
       </div>
 
@@ -221,10 +221,10 @@ const {
                 <Button
                   variant="default"
                   size="lg"
-                  className="inline-flex items-center shadow-lg hover:shadow-xl transition-shadow shadow-primary/30"
+                  className="inline-flex items-center shadow-lg hover:shadow-xl transition-shadow shadow-primary/30 dark:text-gray-50"
                 >
                   <ExternalLink className="mr-2" size={20} />
-                  Ver demo
+                  <p>Ver demo</p>
                 </Button>
               </a>
             )
@@ -330,7 +330,7 @@ const {
           <Button
             variant="default"
             size="lg"
-            className="shadow-lg hover:shadow-xl transition-shadow shadow-primary/30"
+            className="shadow-lg hover:shadow-xl transition-shadow shadow-primary/30 dark:text-gray-50"
           >
             Contáctame
           </Button>
