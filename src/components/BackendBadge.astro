@@ -6,17 +6,17 @@ import { Image } from "astro:assets";
 <div class="bg-white dark:bg-card rounded-lg transition-shadow p-6 border border-gray-200 dark:border-gray-700">
     <h3 class="text-xl font-bold mb-4 text-center">Backend</h3>
     <div class="flex flex-wrap gap-2 justify-center">
-        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9 dark:hover:text-white dark:hover:bg-primary/20 transition-colors">
             <Image src="/c--4.svg" width={24} height={24} alt="C#" class="w-6 h-6" />
             <p class="text-lg font-semibold p-1">Asp.net</p>
         </Badge>
-        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9">
+        <Badge variant="secondary" className="flex items-center gap-1 py-1 px-4 hover:bg-foreground/9 dark:hover:text-white dark:hover:bg-primary/20 transition-colors">
             <Image src="/python-5.svg" width={24} height={24} alt="Flask" class="w-6 h-6" />
             <p class="text-lg font-semibold p-1">Flask</p>
         </Badge>
-        <Badge variant="secondary" className="flex items-center gap-1 py-2 px-4 bg-green-100 hover:bg-foreground/9">
+        <Badge variant="secondary" className="flex items-center gap-1 py-2 px-4 bg-green-100 dark:text-accent hover:bg-foreground/9 dark:hover:text-white dark:hover:bg-primary/20 transition-colors">
             <Image src="/supabase-logo-icon.svg" width={24} height={24} alt="Supabase" class="w-6 h-6" />
-            <p class="text-lg font-semibold p-1 dark:text-accent">Supabase</p>
+            <p class="text-lg font-semibold p-1">Supabase</p>
         </Badge>
         
     </div>
