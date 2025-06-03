@@ -6,8 +6,11 @@ import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Info from "@/layouts/info.astro";
 
+
 // Define la función getStaticPaths requerida para rutas dinámicas
 export function getStaticPaths() {
+ 
+  
   // Define los datos de los proyectos
   const projects = [
     {
@@ -241,13 +244,19 @@ const {
 
       <!-- Imagen del proyecto -->
       <div
-        class="mb-12 rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800"
+        class="mb-12 rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800 hover:scale-105 transition-transform duration-300 cursor-pointer"
       >
-        <img
+        
+        <Image
           src={imageUrl}
-          alt={`Captura de pantalla del proyecto ${title}`}
+          alt="Project screenshot"
           class="w-full h-auto object-cover"
-        />
+          width={1200}
+          height={630}
+          />
+        
+
+      
       </div>
 
       <!-- Características -->
